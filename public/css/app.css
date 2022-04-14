@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+body > .login {
+    background-color: rgba(0, 0, 0, 0.048);
+    height: 100vh;
+    color: rgba(0, 0, 0, 0.658);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-item {
+    font-size: 1rem;
+    letter-spacing: 0px;
+}
+
+.banner {
+    background: url('img/flower1.png');
+}
+
+.img-banner {
+    width: 100%;
+}
+
+.banner-title {
+    color: grey;
+    z-index: 100;
+    position: absolute;
+}
+
+.nav-link {
+    color: rgba(34, 34, 34, 0.918);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    padding: 10px 0px;
+    text-transform: uppercase;
+}
+
+.nav-link:hover {
+    color: rgba(255, 80, 80, 0.671);
+}
+
+.navbar-active {
+    color: rgb(255, 80, 80);
+}
+
+.content-line {
+    border: 3px solid rgb(255, 0, 0);
+    border-radius: 3px;
+}
+
+.slider-image {
+    border-radius: 15px 15px 15px 15px;
+}
+
+.product-card {
+    background-color: rgba(0, 0, 0, 0.062);
+    border-radius: 20px;
+    transition: all .2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}
+
+.product-header {
+    margin-bottom: 26px;
+    position: relative;
+    width: 248px;
+    height: 248px;
+    overflow: hidden;
+}
+
+.product-header::before {
+    position: absolute;
+	content: "";
+	top: 0;
+    left: 0;
+	z-index: -1;
+	transition: all 0.3s;
+}
+
+.product-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: all 0.3 ease-in-out;
+    
+}
+
+.product-image:hover {
+    transform: scale(1.2) rotate(2deg);
+}
+
+.product-header > .discount {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #ffffff;
+    background-color: #fe302f;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.product-header  ul {
+    position: absolute;
+    bottom: -41px;
+    left: 67px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    transition: bottom 0.5s, opacity 0.5s;
+}
+
+.product-header ul li {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.product-header ul li a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #ffffff;
+    color: #444444;
+    text-align: center;
+    box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
+    transition: color 0.2s;
+}
+
+.product-header ul li a:hover {
+    color: #fe302f;
+}
+
+.product-header:hover ul {
+    bottom: 30px;
+    opacity: 1;
+}
+
+.product-title {
+    font-size: 1rem;
+}
+
+.product-content {
+    position: static;
+}
+
+.product-content h4 {
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.product-content .product-old-price {
+    position: relative;
+    padding: 0 7px;
+    margin-right: 2px;
+    opacity: 0.6;
+}
+
+.product-content .product-old-price::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #444444;
+    transform: translateY(-50%);
+}
