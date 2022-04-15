@@ -1,3 +1,9 @@
+<?php
+
+use App\Models\UserModel;
+$userModel = new UserModel();
+$userData = $userModel->where("email", session()->get("email"))->first();
+?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Sidebar -->
@@ -8,7 +14,7 @@
                 <img src="<?= base_url('img/user2-160x160.jpg') ?>" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block"><?= $userData['name'] ?></a>
             </div>
         </div>
 
@@ -119,13 +125,27 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
-                    <a href="<?= base_url('admin/users') ?>" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Users
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/users/create') ?>" class="nav-link">
+                                <p>Create user</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/users') ?>" class="nav-link">
+                                <p>View users</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="<?= base_url('admin/settings') ?>" class="nav-link">

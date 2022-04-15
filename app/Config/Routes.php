@@ -24,6 +24,7 @@ $routes->group("admin", function ($routes) {
     $routes->add("", "Home::admin");
 
     $routes->group("product", function ($routes) {
+        $routes->add("", "Products::view");
         $routes->add("create", "Products::create");
         $routes->add("save", "Products::save");
         $routes->add("view", "Products::view");
@@ -32,6 +33,7 @@ $routes->group("admin", function ($routes) {
     });
 
     $routes->group("category", function ($routes) {
+        $routes->add("", "Category::view");
         $routes->add("create", "Category::create");
         $routes->add("save", "Category::save");
         $routes->add("delete", "Category::delete");
@@ -39,11 +41,21 @@ $routes->group("admin", function ($routes) {
     });
     
     $routes->group("discount", function ($routes) {
+        $routes->add("", "Discount::view");
         $routes->add("create", "Discount::create");
         $routes->add("save", "Discount::save");
         $routes->add("delete", "Discount::delete");
         $routes->add("view", "Discount::view");
     });
+
+    $routes->group("users", function ($routes) {
+        $routes->add("", "Users::view");
+        $routes->add("view", "Users::view");
+        $routes->add("create", "Users::create");
+        $routes->add("save", "Users::save");
+        $routes->add("delete", "Users::delete");
+    });
+
 });
 
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {

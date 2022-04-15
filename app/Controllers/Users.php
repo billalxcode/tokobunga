@@ -80,18 +80,101 @@ class Users extends BaseController
             echo view("admin/account/login", $this->context);
         }
     }
-
-    public function update() {
-
+    
+    public function delete() {
+        $userData = $this->checkSession();
+        if ($userData) {
+            $method = strtolower($this->request->getMethod());
+            if ($method == "post") {
+                $userid = $this->request->getVar("userid");
+                $userdata = $this->userModel->where("id", $userid)->first();
+                if ($userdata) {
+                    $this->userModel->delete($userdata['id']);
+                    $this->session->setFlashdata("success", "Data berhasil dihapus");
+                    return redirect()->to("/admin/users");
+                } else {
+                    $this->session->setFlashdata("error", "Maaf data tidak ditemukan");
+                    return redirect()->to("/admin/users");
+                }
+            } else {
+                $this->session->setFlashdata("error", "Maaf anda tidak diizinkan untuk mengakses ini");
+                return redirect()->to("/admin/users");
+            }
+        } else {
+            $this->session->setFlashdata("error", "Maaf anda belum login");
+            return redirect()->to("/login");
+        }
     }
 
-    public function delete() {
+    public function view() {
+        $userData = $this->checkSession();
+        if ($userData) {
+            $this->context["title"] = "View users";
+            $this->context['users'] = $this->userModel->findAll();
+            
+            echo view("admin/layout/header", $this->context);
+            echo view("admin/layout/sidebar");
+            echo view("admin/users/viewUser", $this->context);
+            echo view("admin/layout/footer");
+        } else {
+            $this->session->setFlashdata("error", "Maaf anda belum login");
+            return redirect()->to("/login");
+        }
+    }
 
+    public function create() {
+        $userData = $this->checkSession();
+        if ($userData) {
+            $this->context["title"] = "Create users";
+        
+            echo view("admin/layout/header", $this->context);
+            echo view("admin/layout/sidebar");
+            echo view("admin/users/createUser", $this->context);
+            echo view("admin/layout/footer");
+        } else {
+            $this->session->setFlashdata("error", "Maaf anda belum login");
+            return redirect()->to("/login");
+        }
+    }
+
+    public function save() {
+        $userSession = $this->checkSession();
+        if ($userSession) {
+            $method = strtolower($this->request->getMethod());
+            if ($method == "post") {
+                $action = $this->request->getVar("action");
+                $fullname = $this->request->getVar("name");
+                $username = $this->request->getVar("username");
+                $email = $this->request->getVar("email");
+                $password = $this->request->getVar("password");
+
+                if ($action == "new") {
+                    $data_post = [
+                        "username" => $username,
+                        "name" => $fullname,
+                        "email" => $email,
+                        "isAdmin" => 1,
+                        "password" => password_hash($password, PASSWORD_BCRYPT)
+                    ];
+
+                    $this->userModel->save($data_post);
+
+                    $this->session->setFlashdata("success", "Data berhasil ditambahkan");
+                    return redirect()->to("admin/users/create");
+                } else {
+                    return redirect()->to("admin/users/create");
+                }
+            } else {
+                return redirect()->to("admin/category/create");
+            }
+        } else {
+            $this->session->setFlashdata("error", "Maaf anda belum login");
+            return redirect()->to("/login");
+        }
     }
 
     public function logout() {
         $userSession = $this->checkSession();
-
         if ($userSession) {
             $this->session->destroy();
             $this->session->setFlashdata("success", "Berhasil logout");
