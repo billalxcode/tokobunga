@@ -16,6 +16,7 @@ $routes->set404Override();
 $routes->setAutoRoute(true);
 
 $routes->get('/', 'Home::index');
+$routes->get('/product', 'Home::product');
 
 $routes->add("/login", "Users::login");
 $routes->add("/logout", "Users::logout");
@@ -28,7 +29,6 @@ $routes->group("admin", function ($routes) {
         $routes->add("save", "Products::save");
         $routes->add("view", "Products::view");
         $routes->add("delete", "Products::delete");
-        
     });
 
     $routes->group("category", function ($routes) {
@@ -37,7 +37,7 @@ $routes->group("admin", function ($routes) {
         $routes->add("delete", "Category::delete");
         $routes->add("view", "Category::view");
     });
-    
+
     $routes->group("discount", function ($routes) {
         $routes->add("create", "Discount::create");
         $routes->add("save", "Discount::save");

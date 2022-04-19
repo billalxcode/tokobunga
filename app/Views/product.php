@@ -63,33 +63,22 @@
 
     <div class="container">
         <hr class="content-line">
-        <div class="content-about align-content-center mb-5 mt-5" id="tentang">
-            <img src="<?= base_url('img/mentahan Logo BELANJA BUNGA.png') ?>" alt="" data-aos="fade-up-right">
-            <div class="about d-flex" data-aos="fade-down">
-                <div class="mx-auto">
-                    <p>
-                        " <b style="color: rgb(255, 80, 80);">Belanja Bunga</b> adalah Lorem ipsum dolor, sit amet
-                        consectetur adipisicing elit. Placeat
-                        voluptatem eaque fugit, necessitatibus blanditiis possimus, exercitationem atque dignissimos
-                        numquam tenetur quaerat nemo pariatur officia corporis! Temporibus odit beatae commodi nisi? "
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="banner text-center mt-5" data-aos="zoom-in-up">
-            <img src="<?= base_url('img/banner bunga.jpg') ?>">
-        </div>
         <section class="section-products" id="produk">
             <div class="container">
                 <div class="row justify-content-center text-center">
                     <div class="col-md-8 col-lg-6">
                         <div class="header">
-                            <!-- <h3>Featured Product</h3> -->
-                            <h2>Recommendation Products</h2>
+                            <h3>Featured Product</h3>
+                            <h2>All Products</h2>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="w-100 d-flex">
+                    <form class="ms-auto">
+                        <input type="text" name='search' value='<?= $search ?>' class="form-control rounded rounded-pill" placeholder="Find Product">
+                    </form>
+                </div>
+                <div class="row" id="cart-result">
                     <?php $no = 1; ?>
                     <?php foreach ($products as $product) : ?>
                         <div class="col-md-6 col-lg-4 col-xl-3">
@@ -111,20 +100,13 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="w-100 d-flex">
-                    <a href="/product" class="btn btn-pink text-white rounded rounded-pill ms-auto">Tampilkan Semua</a>
+            </div>
+            <div class="w-100 d-flex">
+                <div class="ms-auto">
+                    <?= $pager->links('page', 'bootstrap_pagination') ?>
                 </div>
             </div>
         </section>
-    </div>
-
-    <div class="contact-wa text-dark d-flex" data-aos="fade-up-right" id="hub-kami">
-        <div class="m-auto text-center" data-aos="fade-up-left">
-            <h1 class="fw-bolder">Contact WhatsApp</h1>
-            <p class="fw-normal">Kamu bisa langsung menghubungi kami untuk mengetahui apa yang kami jual !</p>
-            <button class="btn btn-success rounded rounded-pill fw-bolder"><i class="fab fa-whatsapp"></i>
-                WhatsApp</button>
-        </div>
     </div>
     <!-- Site footer -->
     <footer class="site-footer">
@@ -187,9 +169,7 @@
                 speed: 2
             }
         }).mount();
-
         document.addEventListener("DOMContentLoaded", function(event) {
-
             const cartButtons = document.querySelectorAll('.cart-button');
             cartButtons.forEach(button => {
                 button.addEventListener('click', cartClick);

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
+use App\Models\CategoryModel;
 
 class Home extends BaseController
 {
@@ -11,14 +12,45 @@ class Home extends BaseController
     public function index()
     {
         $productModel = new ProductModel();
+        $categoryModel = new CategoryModel();
 
         $this->context["title"] = "Toko Bunga";
-        $this->context["products"] = $productModel->findAll();
-        
+        $this->context["products"] = $productModel->findAll(6);
+        $this->context["categories"] = $categoryModel->findAll();
+
         echo view("indexPage", $this->context);
     }
-
-    public function admin() {
+    public function product()
+    {
+        $categoryModel = new CategoryModel();
+        $request = service('request');
+        $searchData = $request->getGet();
+        $search = "";
+        if (isset($searchData) && isset($searchData['search'])) {
+            $search = $searchData['search'];
+        }
+        // Get data 
+        $product = new ProductModel();
+        if ($search == '') {
+            $paginateData = $product->paginate(6,'page');
+        } else {
+            $paginateData = $product->select('*')
+                ->orLike('product_name', $search)
+                ->orLike('product_price', $search)
+                ->orLike('product_description', $search)
+                ->paginate(6, 'page');
+        }
+        $data = [
+                'title' => 'Product',
+                'categories' => $categoryModel->findAll(),
+                'products' => $paginateData,
+                'pager' => $product->pager,
+                'search' => $search
+            ];
+        return view('product', $data); 
+    }
+    public function admin()
+    {
         $this->context["title"] = "Dashboard";
 
         echo view("admin/layout/header", $this->context);
