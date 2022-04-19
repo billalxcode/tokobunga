@@ -94,32 +94,6 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Page
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('admin') ?>" class="nav-link">
-                                <p>Beranda</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/forms/advanced.html" class="nav-link">
-                                <p>Hubungi kami</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/forms/editors.html" class="nav-link">
-                                <p>Sosial media</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
                     <a href="<?= base_url('admin/users') ?>" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
